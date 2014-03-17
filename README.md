@@ -78,6 +78,10 @@ Install a miner with a specific configuration:
     cd miner-install
     sudo make install
 
+[CGMiner]: https://github.com/ckolivas/cgminer
+[SGMiner]: https://github.com/veox/sgminer
+[BFGMiner]: https://github.com/luke-jr/bfgminer
+
 [apt]: http://wiki.debian.org/Apt
 [yum]: http://yum.baseurl.org/
 [pacman]: https://wiki.archlinux.org/index.php/Pacman
