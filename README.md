@@ -25,7 +25,7 @@ Currently supports installation of [CGMiner], [BFGMiner], or [SGMiner]
   * [pacman]
   * [macports]
   * [brew]
-* Has tests.
+* ~~Has tests.~~ Sorry...
 
 ## Anti-Features
 
