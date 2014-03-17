@@ -1,0 +1,2 @@
+cgminer-3.7.2.tar.gz: a8a7c1213f2d836221611185d0ec5bb2
+cgminer-4.1.0.tar.gz: 0b95be9dda876e0672785551ebb2f7ff

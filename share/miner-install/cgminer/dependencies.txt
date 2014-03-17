@@ -1,0 +1,1 @@
+apt: build-essential autoconf libtool pkg-config libncurses-dev libusb-dev libcurl4-openssl-dev libusb-1.0-0-dev
