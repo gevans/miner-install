@@ -228,7 +228,7 @@ function known_miners()
 function usage()
 {
   cat <<USAGE
-usage: miner-install [OPTIONS] [RUBY [VERSION] [-- CONFIGURE_OPTS ...]]
+usage: miner-install [OPTIONS] [MINER [VERSION] [-- CONFIGURE_OPTS ...]]
 
 Options:
 
