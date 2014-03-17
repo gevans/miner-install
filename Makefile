@@ -1,6 +1,6 @@
-NAME=ruby-install
-VERSION=0.4.1
-AUTHOR=postmodern
+NAME=miner-install
+VERSION=0.1.0
+AUTHOR=gevans
 URL=https://github.com/$(AUTHOR)/$(NAME)
 
 DIRS=etc lib bin sbin share
@@ -19,11 +19,11 @@ DOC_DIR=$(PREFIX)/share/doc/$(PKG_NAME)
 pkg:
 	mkdir $(PKG_DIR)
 
-share/man/man1/ruby-install.1: doc/man/ruby-install.1.md
-	kramdown-man doc/man/ruby-install.1.md > share/man/man1/ruby-install.1
+share/man/man1/miner-install.1: doc/man/miner-install.1.md
+	kramdown-man doc/man/miner-install.1.md > share/man/man1/miner-install.1
 
-man: doc/man/ruby-install.1.md share/man/man1/ruby-install.1
-	git commit doc/man/ruby-install.1.md share/man/man1/ruby-install.1
+man: doc/man/miner-install.1.md share/man/man1/miner-install.1
+	git commit doc/man/miner-install.1.md share/man/man1/miner-install.1
 
 download: pkg
 	wget -O $(PKG) $(URL)/archive/v$(VERSION).tar.gz
@@ -55,11 +55,6 @@ tag:
 
 release: tag download sign
 
-rpm:
-	rpmdev-setuptree
-	spectool -g -R rpm/ruby-install.spec
-	rpmbuild -ba rpm/ruby-install.spec
-
 install:
 	for dir in $(INSTALL_DIRS); do mkdir -p $(PREFIX)/$$dir; done
 	for file in $(INSTALL_FILES); do cp $$file $(PREFIX)/$$file; done
@@ -70,4 +65,4 @@ uninstall:
 	for file in $(INSTALL_FILES); do rm -f $(PREFIX)/$$file; done
 	rm -rf $(DOC_DIR)
 
-.PHONY: build man download sign verify clean test tag release rpm install uninstall all
+.PHONY: build man download sign verify clean test tag release install uninstall all

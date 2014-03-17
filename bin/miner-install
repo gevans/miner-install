@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+
+source "${0%/*}/../share/miner-install/miner-install.sh"
+
+if [[ $# -eq 0 ]]; then
+  known_miners
+  exit
+fi
+
+parse_options "$@" || exit $?
+load_miner         || exit $?
+
+if [[ $no_reinstall -eq 1 ]] && [[ -x "$install_dir/bin/$miner" ]]; then
+  log "Miner is already installed into $install_dir"
+  exit
+fi
+
+log "Installing $miner $miner_version into $install_dir ..."
+
+pre_install || fail "Pre-install tasks failed!"
+
+if [[ ! $no_install_deps -eq 1 ]]; then
+  install_deps || fail "Installing dependencies failed!"
+fi
+
+if [[ ! $no_download -eq 1 ]]; then
+  download_miner || fail "Download of $miner_url failed!"
+fi
+
+if [[ ! $no_verify -eq 1 ]]; then
+  verify_miner || fail "Verification of of $miner_archive failed!"
+fi
+
+extract_miner    || fail "Unpacking of $miner_archive failed!"
+install_adl_sdk  || fail "Installing ADL SDK $adl_sdk_version failed!"
+download_patches || fail "Fetching patches $patches failed!"
+apply_patches    || fail "Patching $miner $miner_version failed!"
+cd "$src_dir/$miner_src_dir"
+configure_miner  || fail "Configuration of $miner $miner_version failed!"
+clean_miner      || fail "Cleaning $miner $miner_version failed!"
+compile_miner    || fail "Compiling $miner $miner_version failed!"
+install_miner    || fail "Installation of $miner $miner_version failed!"
+post_install     || fail "Post-install tasks failed!"
+
+log "Successfully installed $miner $miner_version into $install_dir"
