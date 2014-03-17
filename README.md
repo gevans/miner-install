@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/postmodern/miner-install.png?branch=master)](https://travis-ci.org/gevans/miner-install)
 
-Forked from [ruby-install](https://github.com/postmodern/miner-install) and
+Forked from [ruby-install](https://github.com/postmodern/ruby-install) and
 adapted to work with CGMiner and its myriad of forks.
 
 Currently supports installation of [CGMiner], [BFGMiner], or [SGMiner]
