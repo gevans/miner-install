@@ -133,21 +133,21 @@ function copy_adl_sdk()
 #
 function install_adl_sdk()
 {
-  if [ -z "$miner_require_adl_sdk" ]; then
-    miner_require_adl_sdk=1
+  if [[ -z "$miner_install_adl_sdk" ]]; then
+    miner_install_adl_sdk=true
   fi
 
-  if [ "$miner_require_adl_sdk" -eq 0 ]; then
+  if [ "$miner_install_adl_sdk" = true ]; then
+    init_adl_sdk
+    log "Installing ADL SDK $adl_sdk_version ..."
+    download_adl_sdk || return $?
+    verify_adl_sdk   || return $?
+    extract_adl_sdk  || return $?
+    copy_adl_sdk     || return $?
+  else
     log "Skipping install of ADL SDK."
     return
   fi
-
-  init_adl_sdk
-  log "Installing ADL SDK $adl_sdk_version ..."
-  download_adl_sdk || return $?
-  verify_adl_sdk   || return $?
-  extract_adl_sdk  || return $?
-  copy_adl_sdk     || return $?
 }
 
 #
