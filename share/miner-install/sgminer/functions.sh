@@ -6,7 +6,7 @@ miner_mirror="${miner_mirror:-https://github.com/veox/sgminer/archive}"
 miner_url="${miner_url:-$miner_mirror/$miner_version.tar.gz}"
 
 #
-# Configures sgminer.
+# Configures sgminer
 #
 function configure_miner()
 {
@@ -18,7 +18,7 @@ function configure_miner()
 }
 
 #
-# Cleans sgminer.
+# Cleans sgminer
 #
 function clean_miner()
 {
@@ -40,6 +40,6 @@ function compile_miner()
 #
 function install_miner()
 {
-  log "Installing miner $miner_version ..."
+  log "Installing sgminer $miner_version ..."
   make install || return $?
 }
