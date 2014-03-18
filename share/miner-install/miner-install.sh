@@ -360,6 +360,12 @@ function parse_options()
     1)
       miner="${argv[0]}"
       miner_version="stable"
+
+      local miner_dir="$miner_install_dir/$miner"
+      if [[ ! -d "$miner_dir" ]]; then
+        miner="$(echo "${argv[0]}" | grep -oEi "[a-z]+")"
+        miner_version="$(echo "${argv[0]}" | grep -oEi "[^a-z\-].+")"
+      fi
       ;;
     0)
       echo "miner-install: too few arguments" >&2
