@@ -33,7 +33,6 @@ function extract_miner()
 #
 function configure_miner()
 {
-  set -x
   log "Configuring bfgminer $miner_version ..."
   ./autogen.sh || return $?
   ./configure --prefix="$install_dir" --enable-scrypt \
