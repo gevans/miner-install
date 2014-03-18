@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+#
+# Summary: Install a miner version using miner-install
+#
+# Usage: pick install [options] <miner> [version] [-- configure_opts ...]
+#
+#    -M, --mirror URL   Alternate mirror to download the miner archive from
+#    -i, --install-dir  DIR  Directory to install miner into
+#    -j, --jobs JOBS    Number of jobs to run in parallel when compiling
+#    -m, --md5 MD5      MD5 checksum of the miner archive
+#    -p, --patch FILE   Patch to apply to the miner source code
+#    -r, --miners-dir   DIR  Directory that contains other installed Rubies
+#    -s, --src-dir DIR  Directory to download source-code into
+#    -u, --url URL      Alternate URL to download the miner archive from
+#    --no-download      Use the previously downloaded miner archive
+#    --no-install-deps  Do not install build dependencies before installing miner
+#    --reinstall        Allow installation if another miner is detected in same location
+#    --no-verify        Do not verify the downloaded miner archive
+#    -V, --version      Prints the version
+#    -h, --help         Prints this message
+#
+# For detailed information on installing miners with miner-install, see:
+#   https://github.com/gevans/miner-install#readme
+
+set -e
+[ -n "$PICK_DEBUG" ] && set -x
+
+if [ ! -z "$PICK_ROOT" ]; then
+  miners_dir="$PICK_ROOT/versions"
+  src_dir="$PICK_ROOT/cache"
+  mkdir -p "$miners_dir" "$src_dir"
+fi
+
+source "$(dirname "$0")/miner-install"

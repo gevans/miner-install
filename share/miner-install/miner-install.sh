@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-set -e
-[ -n "$MINER_DEBUG" ] && set -x
-
 shopt -s extglob
 
 miner_install_version="0.1.0"
@@ -12,15 +9,6 @@ miners=(cgminer sgminer bfgminer)
 patches=()
 configure_opts=()
 make_opts=()
-
-#
-# Set defaults when loaded through `miner`
-#
-if [ ! -z "$MINER_ROOT" ]; then
-  miners_dir="$MINER_ROOT/versions"
-  src_dir="$MINER_ROOT/cache"
-  mkdir -p "$miner_install_dir" "$src_dir"
-fi
 
 #
 # Auto-detect the package manager.
