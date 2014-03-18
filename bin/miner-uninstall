@@ -1,0 +1,69 @@
+#!/usr/bin/env bash
+#
+# Summary: Uninstall a specific miner version
+#
+# Usage: miner uninstall [-f|--force] <miner> <version>
+#
+#     -f  Remove the speicified version without prompting for confirmation. If
+#         the version does not exist, do not display an error message.
+#
+# See `miner versions` for a complete list of installed versions.
+
+set -e
+[ -n "$MINER_DEBUG" ] && set -x
+
+unset FORCE
+argv=()
+
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+  "-f" | "--force" )
+    shift
+    ;;
+  "-h" | "--help" )
+    miner-help uninstall
+    exit
+    ;;
+  -* )
+    echo "miner: unrecognized option $1" >&2
+    exit 1
+    ;;
+  * )
+    argv+=($1)
+    shift
+    ;;
+  esac
+done
+
+case ${#argv[*]} in
+2 )
+  DEFINITION="${argv[0]}-${argv[1]}"
+  ;;
+1 )
+  DEFINITION="${argv[0]}"
+  ;;
+0 )
+  echo "miner: no version specified for uninstall" >&2
+  exit 1
+  ;;
+esac
+
+VERSION_NAME="${DEFINITION##*/}"
+PREFIX="$MINER_ROOT/versions/$VERSION_NAME"
+
+if [ -z "$FORCE" ]; then
+  if [ ! -d "$PREFIX" ]; then
+    echo "miner: version \`$VERSION_NAME' not installed" >&2
+    exit 1
+  fi
+
+  read -p "miner: remove $PREFIX? [y/N] "
+  case "$REPLY" in
+  y* | Y* ) ;;
+  * ) exit 1 ;;
+  esac
+fi
+
+if [ -d "$PREFIX" ]; then
+  rm -rf "$PREFIX"
+fi
