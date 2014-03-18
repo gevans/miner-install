@@ -352,7 +352,7 @@ function parse_options()
       local miner_dir="$miner_install_dir/$miner"
       if [[ ! -d "$miner_dir" ]]; then
         miner="${argv[0]%%-*}"
-        miner_version="${argv[0]##*-}"
+        miner_version="${argv[0]#*-}"
       fi
       ;;
     0)
