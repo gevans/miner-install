@@ -351,8 +351,8 @@ function parse_options()
 
       local miner_dir="$miner_install_dir/$miner"
       if [[ ! -d "$miner_dir" ]]; then
-        miner="$(echo "${argv[0]}" | grep -oEi "[a-z]+")"
-        miner_version="$(echo "${argv[0]}" | grep -oEi "[^a-z\-].+")"
+        miner="${argv[0]%%-*}"
+        miner_version="${argv[0]##*-}"
       fi
       ;;
     0)
