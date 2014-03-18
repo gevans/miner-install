@@ -62,8 +62,8 @@ https://github.com/gevans/miner-install#readme
 `--no-install-deps`
 	Do not install build dependencies before installing miner.
 
-`--no-reinstall`
-	Skip installation if another miner is detected in same location.
+`--reinstall`
+	Allow installation if another miner is detected in same location.
 
 `-V`, `--version`
 	Prints the current miner-install version.

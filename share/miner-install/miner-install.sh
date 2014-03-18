@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+set -e
+[ -n "$MINER_DEBUG" ] && set -x
+
 shopt -s extglob
 
 miner_install_version="0.1.0"
@@ -9,6 +12,15 @@ miners=(cgminer sgminer bfgminer)
 patches=()
 configure_opts=()
 make_opts=()
+
+#
+# Set defaults when loaded through `miner`
+#
+if [ ! -z "$MINER_ROOT" ]; then
+  miners_dir="$MINER_ROOT/versions"
+  src_dir="$MINER_ROOT/cache"
+  mkdir -p "$miner_install_dir" "$src_dir"
+fi
 
 #
 # Auto-detect the package manager.
@@ -237,12 +249,12 @@ Options:
   -j, --jobs JOBS    Number of jobs to run in parallel when compiling
   -m, --md5 MD5      MD5 checksum of the miner archive
   -p, --patch FILE   Patch to apply to the miner source code
-  -r, --miners-dir   DIR  Directory that contains other installed Rubies
+  -r, --miners-dir   DIR  Directory that contains other installed miners
   -s, --src-dir DIR  Directory to download source-code into
   -u, --url URL      Alternate URL to download the miner archive from
   --no-download      Use the previously downloaded miner archive
   --no-install-deps  Do not install build dependencies before installing miner
-  --no-reinstall     Skip installation if another miner is detected in same location
+  --reinstall        Allow installation if another miner is detected in same location
   --no-verify        Do not verify the downloaded miner archive
   -V, --version      Prints the version
   -h, --help         Prints this message
@@ -312,8 +324,8 @@ function parse_options()
         no_install_deps=1
         shift
         ;;
-      --no-reinstall)
-        no_reinstall=1
+      --reinstall)
+        reinstall=1
         shift
         ;;
       -V|--version)
