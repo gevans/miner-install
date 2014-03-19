@@ -80,7 +80,7 @@ function init_adl_sdk()
 
   adl_sdk_archive="${adl_sdk_archive:-adl-sdk-$adl_sdk_version.tar.gz}"
   adl_sdk_src_dir="${adl_sdk_src_dir:-adl-sdk-$adl_sdk_version}"
-  adl_sdk_mirror="${adl_sdk_mirror:-https://d2tncua5xjpuqz.cloudfront.net/adl-sdk}"
+  adl_sdk_mirror="${adl_sdk_mirror:-http://files.trymining.com/adl-sdk}"
   adl_sdk_url="${adl_sdk_url:-$adl_sdk_mirror/$adl_sdk_archive}"
   miner_adl_sdk_dir="${miner_adl_sdk_dir:-$miner_src_dir/ADL_SDK}"
 }
