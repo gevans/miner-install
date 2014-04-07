@@ -28,7 +28,7 @@ if [[ ! $no_download -eq 1 ]]; then
 fi
 
 if [[ ! $no_verify -eq 1 ]]; then
-  verify_miner || fail "Verification of of $miner_archive failed!"
+  verify_miner || fail "Verification of $miner_archive failed!"
 fi
 
 extract_miner    || fail "Unpacking of $miner_archive failed!"
